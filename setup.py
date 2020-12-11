@@ -4,6 +4,12 @@ import sys
 if sys.version_info < (3, 7, 0):
     raise OSError(f'Jina requires Python 3.7 and above, but yours is {sys.version}')
 
+try:
+    with open('README.md', encoding='utf8') as fp:
+        _long_description = fp.read()
+except FileNotFoundError:
+    _long_description = ''
+
 
 setuptools.setup(
     name="streamlit-jina",
@@ -14,8 +20,8 @@ setuptools.setup(
     url='https://opensource.jina.ai',
     download_url='https://github.com/jina-ai/streamlit-jina/tags',
     description="Streamlit component for Jina neural search",
-    long_description="Streamlit component for Jina neural search",
-    long_description_content_type="text/plain",
+    long_description=_long_description,
+    long_description_content_type="text/markdown",
     packages=setuptools.find_packages(),
     include_package_data=True,
     classifiers=[
