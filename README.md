@@ -47,11 +47,11 @@ jina.text_search(endpoint="http://0.0.0.0:45678/api/search")
 
 You can pass several parameters to the component:
 
-| Parameter  | Type   | Details                                                 | Optional? |
-| ---        | ---    | ---                                                     | ---       |
-| `endpoint` | `str`  | Endpoint of your Jina instance                          | No        |
-| `top_k`    | `int`  | How many results you want returned                      | Yes       |
-| `hidden`   | `list` | Widgets you want hidden from user (`endpoint`, `top_k`) | Yes       |
+| Parameter  | Type   | Details                                                 |          |
+| ---        | ---    | ---                                                     | ---      |
+| `endpoint` | `str`  | Endpoint of your Jina instance                          | Required |
+| `top_k`    | `int`  | How many results you want returned                      | Optional |
+| `hidden`   | `list` | Widgets you want hidden from user (`endpoint`, `top_k`) | Optional |
 
 ## Todo
 
