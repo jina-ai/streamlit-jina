@@ -1,37 +1,57 @@
-# streamlit-embedcode
+# streamlit-jina
 
-![Python package](https://github.com/randyzwitch/streamlit-embedcode/workflows/Python%20package/badge.svg)
+<!--
+![Python package](https://github.com/randyzwitch/streamlit-jina/workflows/Python%20package/badge.svg)
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/randyzwitch/streamlit-embedcode/examples/streamlit_app.py)
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/randyzwitch/streamlit-jina/examples/streamlit_app.py)
+-->
 
-streamlit-embedcode is the easiest way to embed code snippets into your Streamlit app! This [static component](https://docs.streamlit.io/en/stable/develop_streamlit_components.html#create-a-static-component) supports the following code sharing services:
-
-- [GitHub gist](https://gist.github.com/)
-- [GitLab snippets](https://gitlab.com/explore/snippets)
-- [Pastebin](https://pastebin.com/)
-- [CodePen](https://codepen.io/)
-- [Ideone](https://ideone.com/)
-- [TagMyCode](https://tagmycode.com/)
+streamlit-jina lets you search text or images in your Streamlit app, using [Jina's neural search framework](https://github.com/jina-ai/jina/).
 
 ## Installation
 
-streamlit-embedcode is distributed via [PyPI](https://pypi.org/project/streamlit-embedcode/):
+streamlit-jina is distributed via [PyPI](https://pypi.org/project/streamlit-jina/):
 
 ```python
-pip install streamlit-embedcode
+pip install streamlit-jina
 ```
 
 ## Examples
 
-Using streamlit-embedcode is as simple as importing the code service you want to use:
+Using streamlit-jina is as simple as setting an endpoint and what type of thing you want to search for:
 
 ```python
 import streamlit as st
-from streamlit_embedcode import github_gist
-
-github_gist("https://gist.github.com/randyzwitch/be8c5e9fb5b8e7b046afebcac12e5087/")
+from streamlit_jina import jina
 ```
 
-Optionally, you can provide arguments for `height`, `width` and `scrolling` to control the behavior of the iframe the content is displayed in.
+And then choose your search type and plug in your endpoint:
 
-![github_streamlit_embed](https://github.com/randyzwitch/streamlit-embedcode/blob/master/_static/gh_gist_example.png)
+### Images ([example](examples/jina_image.py))
+
+```python
+jina.image_search(endpoint="http://3.140.167.7:34567/api/search")
+```
+
+### Text ([example](examples/jina_text.py))
+
+```python
+jina.text_search(endpoint="http://0.0.0.0:45678/api/search")
+```
+
+### Parameters
+
+You can pass several parameters to the component:
+
+| Parameter  | Type   | Details                                                 | Optional? |
+| ---        | ---    | ---                                                     | ---       |
+| `endpoint` | `str`  | Endpoint of your Jina instance                          | No        |
+| `top_k`    | `int`  | How many results you want returned                      | Yes       |
+| `hidden`   | `list` | Widgets you want hidden from user (`endpoint`, `top_k`) | Yes       |
+
+## Todo
+
+- Canvas drawing as input
+- Audio/video file upload input
+- Audio/video recording input
+- Audio/video output widgets

@@ -116,7 +116,7 @@ class image:
 
 
 class jina:
-    def text_search(endpoint="", hidden=[], top_k=10, output="raw"):
+    def text_search(endpoint="", top_k=10, output="raw", hidden=[]):
         container = st.beta_container()
         with container:
             # Show input widgets
@@ -141,7 +141,7 @@ class jina:
         return container
 
 
-    def image_search(endpoint="", hidden=[], top_k=10):
+    def image_search(endpoint="", top_k=10, hidden=[]):
         container = st.beta_container()
         with container:
             # Show input widgets
