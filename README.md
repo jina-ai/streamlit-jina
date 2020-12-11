@@ -33,7 +33,7 @@ And then choose your search type and plug in your endpoint:
 jina.image_search(endpoint="http://3.140.167.7:34567/api/search")
 ```
 
-![](.images/image.png)
+<!-- ![](.images/image.png) -->
 
 ### Text ([example](examples/jina_text.py))
 
@@ -41,7 +41,7 @@ jina.image_search(endpoint="http://3.140.167.7:34567/api/search")
 jina.text_search(endpoint="http://0.0.0.0:45678/api/search")
 ```
 
-![](.images/text.png)
+<!-- ![](.images/text.png) -->
 
 ### Parameters
 
