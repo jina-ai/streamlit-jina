@@ -1,5 +1,6 @@
-import setuptools
 import sys
+
+import setuptools
 
 if sys.version_info < (3, 6, 0):
     raise OSError(f'Streamlit requires Python 3.7 and above, but yours is {sys.version}')
