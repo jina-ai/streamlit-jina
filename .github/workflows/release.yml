@@ -13,7 +13,7 @@ jobs:
           python-version: 3.7
       - run: |
           pip install twine wheel
-          ./scripts/release.sh
+          ./release.sh
         env:
           TWINE_USERNAME: ${{ secrets.PYPI_USER }}
           TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
