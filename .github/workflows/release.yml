@@ -15,5 +15,5 @@ jobs:
           pip install twine wheel
           ./release.sh
         env:
-          TWINE_USERNAME: ${{ secrets.PYPI_USER }}
+          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
           TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
