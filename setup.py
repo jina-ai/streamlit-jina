@@ -1,8 +1,8 @@
 import setuptools
 import sys
 
-if sys.version_info < (3, 7, 0):
-    raise OSError(f'Jina requires Python 3.7 and above, but yours is {sys.version}')
+if sys.version_info < (3, 6, 0):
+    raise OSError(f'Streamlit requires Python 3.7 and above, but yours is {sys.version}')
 
 try:
     with open('README.md', encoding='utf8') as fp:
@@ -15,7 +15,7 @@ setuptools.setup(
     name="streamlit-jina",
     version="0.1.1",
     author='Jina Dev Team',
-    author_email="alex.cg@streamlit.io",
+    author_email="alex.cg@jina.ai",
     license='Apache 2.0',
     url='https://opensource.jina.ai',
     download_url='https://github.com/jina-ai/streamlit-jina/tags',
@@ -48,7 +48,7 @@ setuptools.setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
     keywords='jina cloud-native neural-search query search index elastic neural-network encoding '
-             'embedding serving docker container image video audio deep-learning',
-    python_requires=">3.7",
+             'embedding serving docker container image video audio deep-learning streamlit frontend',
+    python_requires=">3.6",
     install_requires=["streamlit >= 0.63"],
 )
