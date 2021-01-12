@@ -37,6 +37,9 @@ class Getter:
         data = '{"top_k":' + str(top_k) + ', "mode": "search", "data":' + query + "}"
         response = requests.post(endpoint, headers=headers, data=data)
 
+        import pprint
+        pprint(response)
+
         content = response.json()["search"]["docs"][0]["topkResults"]
         results = []
         for doc in content:
