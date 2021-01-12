@@ -51,13 +51,15 @@ class Getter:
         data = f'{{"top_k": {top_k}, "mode": "search", "data": ["text:{query}"]}}'
         response = requests.post(endpoint, headers=headers, data=data)
 
-        content = response.json()["search"]["docs"][0]["topkResults"]
-        results = []
-        for doc in content:
-            text = doc["matchDoc"]["text"]
-            results.append(text)
+        return response
 
-        return results
+        # content = response.json()["search"]["docs"][0]["topkResults"]
+        # results = []
+        # for doc in content:
+            # text = doc["matchDoc"]["text"]
+            # results.append(text)
+
+        # return results
 
 
 class Renderer:

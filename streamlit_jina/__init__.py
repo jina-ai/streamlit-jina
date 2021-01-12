@@ -9,7 +9,7 @@ headers = {
     "Content-Type": "application/json",
 }
 
-endpoint = 'http://0.0.0.0:45678/api/search'
+endpoint = 'http://0.0.0.0:65481/api/search'
 
 class Encoder:
     def img_base64(byte_string):
@@ -49,11 +49,13 @@ class Getter:
         data = f'{{"top_k": {top_k}, "mode": "search", "data": ["text:{query}"]}}'
         response = requests.post(endpoint, headers=headers, data=data)
 
-        content = response.json()["search"]["docs"][0]["topkResults"]
+        content = response.json()["search"]["docs"]
         results = []
         for doc in content:
-            text = doc["matchDoc"]["text"]
-            results.append(text)
+            matches = doc["matches"] #list
+            for match in matches:
+                results.append(match["text"])
+
 
         return results
 
@@ -121,7 +123,7 @@ class jina:
         with container:
             # Show input widgets
             if "endpoint" not in hidden:
-                endpoint = st.text_input("Endpoint", "http://0.0.0.0:45678/api/search")
+                endpoint = st.text_input("Endpoint", "http://0.0.0.0:65481/api/search")
             else:
                 endpoint = endpoint
 
