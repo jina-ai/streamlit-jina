@@ -14,7 +14,7 @@ except FileNotFoundError:
 
 setuptools.setup(
     name="streamlit-jina",
-    version="0.1.1",
+    version="0.1.2",
     author="Alex Cureton-Griffiths",
     author_email="alex.cg@jina.ai",
     description="Streamlit component for Jina neural search",
