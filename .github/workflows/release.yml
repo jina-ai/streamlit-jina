@@ -1,0 +1,19 @@
+name: Manual Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  regular-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      - run: |
+          pip install twine wheel
+          ./release.sh
+        env:
+          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
