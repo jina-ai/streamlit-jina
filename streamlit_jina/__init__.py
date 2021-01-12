@@ -37,9 +37,6 @@ class Getter:
         data = '{"top_k":' + str(top_k) + ', "mode": "search", "data":' + query + "}"
         response = requests.post(endpoint, headers=headers, data=data)
 
-        import pprint
-        pprint(response)
-
         content = response.json()["search"]["docs"][0]["topkResults"]
         results = []
         for doc in content:
@@ -51,6 +48,9 @@ class Getter:
     def text(query: str, top_k: int, endpoint: str) -> list:
         data = f'{{"top_k": {top_k}, "mode": "search", "data": ["text:{query}"]}}'
         response = requests.post(endpoint, headers=headers, data=data)
+
+        import pprint
+        pprint(response)
 
         content = response.json()["search"]["docs"][0]["topkResults"]
         results = []
