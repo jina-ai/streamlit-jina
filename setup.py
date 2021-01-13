@@ -2,7 +2,7 @@ import sys
 
 import setuptools
 
-if sys.version_info < (3, 6, 0):
+if sys.version_info < (3, 7, 0):
     raise OSError(f'Streamlit requires Python 3.7 and above, but yours is {sys.version}')
 
 try:
@@ -14,14 +14,15 @@ except FileNotFoundError:
 
 setuptools.setup(
     name="streamlit-jina",
-    version="0.1.2",
+    version="0.1.3",
     author="Alex Cureton-Griffiths",
     author_email="alex.cg@jina.ai",
-    description="Streamlit component for Jina neural search",
-    long_description="Streamlit component for Jina neural search",
-    long_description_content_type="text/plain",
+    license='Apache 2.0',
     url="https://github.com/jina-ai/streamlit-jina",
     download_url='https://github.com/jina-ai/streamlit-jina/tags',
+    description="Streamlit component for Jina neural search",
+    long_description=_long_description,
+    long_description_content_type="text/markdown",
     packages=setuptools.find_packages(),
     include_package_data=True,
     classifiers=[
@@ -49,6 +50,6 @@ setuptools.setup(
     ],
     keywords='jina cloud-native neural-search query search index elastic neural-network encoding '
              'embedding serving docker container image video audio deep-learning streamlit frontend',
-    python_requires=">3.6",
+    python_requires=">3.7",
     install_requires=["streamlit >= 0.63"],
 )
