@@ -109,7 +109,6 @@ class jina:
     def text_search(endpoint="", top_k=10, output="raw", hidden=[]):
         container = st.beta_container()
         with container:
-            # Show input widgets
             if "endpoint" not in hidden:
                 endpoint = st.text_input("Endpoint", "http://0.0.0.0:45678/api/search")
             else:
