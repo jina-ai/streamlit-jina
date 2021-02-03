@@ -9,7 +9,7 @@ headers = {
     "Content-Type": "application/json",
 }
 
-endpoint = "http://0.0.0.0:65481/api/search"
+endpoint = "http://0.0.0.0:45678/api/search"
 
 
 class Encoder:
