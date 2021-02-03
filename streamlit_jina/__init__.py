@@ -38,11 +38,12 @@ class Getter:
         data = '{"top_k":' + str(top_k) + ', "mode": "search", "data":' + query + "}"
         response = requests.post(endpoint, headers=headers, data=data)
 
-        content = response.json()["search"]["docs"][0]["topkResults"]
+        content = response.json()["search"]["docs"]
         results = []
         for doc in content:
-            img = doc["matchDoc"]["uri"]
-            results.append(img)
+            matches = doc["matches"]
+            for match in matches:
+                results.append(match["uri"])
 
         return results
 
