@@ -38,7 +38,7 @@ jina.text_search(endpoint="http://0.0.0.0:45678/api/search")
 ### Images ([example](examples/jina_image.py))
 
 ```python
-jina.image_search(endpoint="http://3.140.167.7:34567/api/search")
+jina.image_search(endpoint="http://0.0.0.0:45678/api/search")
 ```
 
 <!-- ![](./github/.images/image.png) -->
