@@ -27,7 +27,7 @@ from streamlit_jina import jina
 
 And then choose your search type and plug in your endpoint:
 
-### Text ([example](examples/jina_text.py))
+### Text ([example](https://github.com/jina-ai/streamlit-jina/blob/main/examples/jina_text.py))
 
 ```python
 jina.text_search(endpoint="http://0.0.0.0:45678/api/search")
@@ -35,7 +35,7 @@ jina.text_search(endpoint="http://0.0.0.0:45678/api/search")
 
 <!-- ![](./github/.images/text.png) -->
 
-### Images ([example](examples/jina_image.py))
+### Images ([example](https://github.com/jina-ai/streamlit-jina/blob/main/examples/jina_image.py))
 
 ```python
 jina.image_search(endpoint="http://0.0.0.0:45678/api/search")
