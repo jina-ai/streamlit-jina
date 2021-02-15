@@ -48,7 +48,7 @@ class Getter:
         return results
 
     def text(query: str, top_k: int, endpoint: str) -> list:
-        data = f'{{"top_k": {top_k}, "mode": "search", "data": ["text:{query}"]}}'
+        data = f'{{"top_k": {top_k}, "mode": "search", "data": ["{query}"]}}'
         response = requests.post(endpoint, headers=headers, data=data)
 
         content = response.json()["search"]["docs"]
