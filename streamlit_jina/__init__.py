@@ -9,100 +9,102 @@ headers = {
     "Content-Type": "application/json",
 }
 
+# Set default endpoint. Usually this would be passed to a function via a parameter
 endpoint = "http://0.0.0.0:45678/api/search"
 
-
-class Encoder:
-    def img_base64(byte_string):
-        output = str(base64.b64encode(byte_string))[2:-1]
-        output = f'["data:image/png;base64,{output}"]'
-
-        return output
-
-    def canvas_to_base64(data):
-        if data is not None:
-            if data.image_data is not None:
-                img_data = data.image_data
-                im = Image.fromarray(img_data.astype("uint8"), mode="RGBA")
-                buffered = BytesIO()
-                im.save(buffered, format="PNG")
-                img_str = base64.b64encode(buffered.getvalue())
-                output = str(img_str)[2:-1]
-                encoded_query = f'["data:image/png;base64,{output}"]'
-
-        return encoded_query
-
-
-class Getter:
-    def images(query: str, top_k: int, endpoint: str) -> list:
-        data = '{"top_k":' + str(top_k) + ', "mode": "search", "data":' + query + "}"
-        response = requests.post(endpoint, headers=headers, data=data)
-
-        content = response.json()["search"]["docs"]
-        results = []
-        for doc in content:
-            matches = doc["matches"]
-            for match in matches:
-                results.append(match["uri"])
-
-        return results
-
-    def text(query: str, top_k: int, endpoint: str) -> list:
-        data = f'{{"top_k": {top_k}, "mode": "search", "data": ["{query}"]}}'
-        response = requests.post(endpoint, headers=headers, data=data)
-
-        content = response.json()["search"]["docs"]
-        results = []
-        for doc in content:
-            matches = doc["matches"]  # list
-            for match in matches:
-                results.append(match["text"])
-
-        return results
-
-
-class Renderer:
-    def images(results: list) -> str:
-        output = ""
-        for doc in results:
-            html = f'<img src="{doc}">'
-            output += html
-
-        return output
-
-    def text(results: list) -> str:
-        header = """
-        | Name | Line |
-        | ---  | ---  |
-        """
-        output = header
-        for text in results:
-            character, words = text.split("[SEP]")
-            result_text = f"| **{character}** | {words} |\n"
-            output += result_text
-
-        return output
-
-
 class text:
-    class results:
-        def markdown(query, top_k, endpoint):
-            raw_results = Getter.text(query, top_k, endpoint)
-            output = Renderer.text(raw_results)
-            return st.markdown(output)
+    """
+    Jina text search
+    """
+    class process:
+        """
+        Process query and results
+        """
+        def json(query: str, top_k: int, endpoint: str) -> list:
+            """
+            Process Jina's JSON output and parse results
+            """
+            data = f'{{"top_k": {top_k}, "mode": "search", "data": ["{query}"]}}'
+            response = requests.post(endpoint, headers=headers, data=data)
 
+            content = response.json()["search"]["docs"]
+            results = []
+            for doc in content:
+                matches = doc["matches"]  # list
+                for match in matches:
+                    results.append(match["text"])
+
+            return results
+
+    class render:
+        """
+        Render results
+        """
         def raw(query, top_k, endpoint):
-            raw_results = Getter.text(query, top_k, endpoint)
+            """
+            Render raw JSON
+            """
+            raw_results = text.process.json(query, top_k, endpoint)
             return raw_results
 
 
 class image:
-    class results:
-        def render(query, top_k, endpoint):
-            encoded_query = Encoder.img_base64(query.read())
-            results = Getter.images(encoded_query, top_k, endpoint)
-            output = Renderer.images(results)
+    """
+    Jina image search
+    """
+    class encode:
+        """
+        Encode image
+        """
+        def img_base64(byte_string):
+            """
+            Encode image file to base64
+            """
+            output = str(base64.b64encode(byte_string))[2:-1]
+            output = f'["data:image/png;base64,{output}"]'
+
+            return output
+
+    class render:
+        """
+        Render image output
+        """
+        def html(results: list) -> str:
+            """
+            Render images as list of HTML img tags
+            """
+            output = ""
+            for doc in results:
+                html = f'<img src="{doc}">'
+                output += html
+
+            return output
+
+        def markdown(query, top_k, endpoint):
+            """
+            Renders images as markdown output
+            """
+            encoded_query = image.encode.img_base64(query.read())
+            # results = image.process.json(encoded_query, top_k, endpoint)
+            results = image.process.json(encoded_query, top_k, endpoint)
+            output = image.render.html(results)
             return st.markdown(output, unsafe_allow_html=True)
+
+    class process:
+        def json(query: str, top_k: int, endpoint: str) -> list:
+            data = (
+                '{"top_k":' + str(top_k) + ', "mode": "search", "data":' + query + "}"
+            )
+            response = requests.post(endpoint, headers=headers, data=data)
+
+            content = response.json()["search"]["docs"]
+            results = []
+            for doc in content:
+                matches = doc["matches"]
+                for match in matches:
+                    results.append(match["uri"])
+
+            return results
 
 
 class jina:
@@ -110,7 +112,7 @@ class jina:
         container = st.beta_container()
         with container:
             if "endpoint" not in hidden:
-                endpoint = st.text_input("Endpoint", "http://0.0.0.0:45678/api/search")
+                endpoint = st.text_input("Endpoint", endpoint)
             else:
                 endpoint = endpoint
 
@@ -122,12 +124,7 @@ class jina:
             button = st.button("Search")
 
             if button:
-                if output == "markdown":
-                    text.results.markdown(endpoint=endpoint, query=query, top_k=top_k)
-                elif output == "raw":
-                    st.write(
-                        text.results.raw(endpoint=endpoint, query=query, top_k=top_k)
-                    )
+                st.write(text.render.raw(endpoint=endpoint, query=query, top_k=top_k))
 
         return container
 
@@ -149,6 +146,6 @@ class jina:
             button = st.button("Search")
 
             if button:
-                image.results.render(query=query, endpoint=endpoint, top_k=top_k)
+                image.render.markdown(query=query, endpoint=endpoint, top_k=top_k)
 
         return container
