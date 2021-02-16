@@ -33,15 +33,15 @@ And then choose your search type and plug in your endpoint:
 jina.text_search(endpoint="http://0.0.0.0:45678/api/search")
 ```
 
-<!-- ![](./github/.images/text.png) -->
+![](https://github.com/jina-ai/streamlit-jina/raw/main/.github/images/text.gif)
 
-### Images ([example](https://github.com/jina-ai/streamlit-jina/blob/main/examples/jina_image.py))
+### Images ([example]())
 
 ```python
 jina.image_search(endpoint="http://0.0.0.0:45678/api/search")
 ```
 
-<!-- ![](./github/.images/image.png) -->
+![](https://github.com/jina-ai/streamlit-jina/raw/main/.github/images/images.gif)
 
 ### Parameters
 
