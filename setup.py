@@ -14,7 +14,7 @@ except FileNotFoundError:
 
 setuptools.setup(
     name="streamlit-jina",
-    version="0.1.7",
+    version="0.1.8",
     author="Alex Cureton-Griffiths",
     author_email="alex.cg@jina.ai",
     license='Apache 2.0',
