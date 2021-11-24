@@ -93,7 +93,7 @@ class image:
 
 class jina:
     def text_search(endpoint=DEFAULT_ENDPOINT, top_k=10, hidden=[]):
-        container = st.beta_container()
+        container = st.container()
         with container:
             if "endpoint" not in hidden:
                 endpoint = st.text_input("Endpoint", endpoint)
@@ -112,7 +112,7 @@ class jina:
         return container
 
     def image_search(endpoint=DEFAULT_ENDPOINT, top_k=10, hidden=[]):
-        container = st.beta_container()
+        container = st.container()
         with container:
             if "endpoint" not in hidden:
                 endpoint = st.text_input("Endpoint", endpoint)
