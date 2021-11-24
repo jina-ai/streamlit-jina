@@ -1,3 +1,9 @@
+# Deprecation notice
+
+Since every search engine use case and data set is different, we recommend building your front-end from scratch rather than using this repo. Please check the front-end in the [meme search engine repo](https://github.com/alexcg1/jina-meme-search) as a reference implementation.
+
+---
+
 # streamlit-jina
 
 <!--
